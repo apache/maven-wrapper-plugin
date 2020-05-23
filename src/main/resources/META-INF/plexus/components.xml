@@ -22,7 +22,7 @@
 <component-set>
   <components>
 
-    <!-- TODO move to maven-core -->  
+    <!-- Delete once available in maven-core -->  
     <component>
       <role>org.apache.maven.lifecycle.Lifecycle</role>
       <implementation>org.apache.maven.lifecycle.Lifecycle</implementation>
