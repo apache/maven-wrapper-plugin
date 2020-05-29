@@ -69,6 +69,28 @@ under the License.
     <javaVersion>8</javaVersion>
   </properties>
 
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jxr-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-project-info-reports-plugin</artifactId>
+          <version>3.1.0</version>
+          <configuration>
+            <pluginManagementExcludes>
+              <exclude>org.eclipse.m2e:lifecycle-mapping</exclude>
+            </pluginManagementExcludes>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
   <dependencies>
     <dependency>
       <groupId>org.apache.maven</groupId>
