@@ -95,7 +95,7 @@ public class WrapperMojo extends AbstractMojo
     private MavenSession session;
     
     // Waiting for org.codehaus.plexus.component.configurator.converters.basic.PathConverter
-    @Parameter( defaultValue = "${project.basedir}" )
+    @Parameter( defaultValue = "${project.basedir}", readonly = true, required = true )
     private File basedir;
 
     // CONSTANTS
