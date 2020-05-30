@@ -25,7 +25,7 @@ under the License.
   <parent>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-plugins</artifactId>
-    <version>33</version>
+    <version>34</version>
     <relativePath />
   </parent>
 
@@ -40,7 +40,7 @@ under the License.
   <inceptionYear>2020</inceptionYear>
 
   <prerequisites>
-    <maven>3.1.0</maven>
+    <maven>${mavenVersion}</maven>
   </prerequisites>
 
   <scm>
@@ -65,7 +65,7 @@ under the License.
   </distributionManagement>
 
   <properties>
-    <mavenVersion>3.1.1</mavenVersion>
+    <mavenVersion>3.1.0</mavenVersion>
     <javaVersion>8</javaVersion>
   </properties>
 
@@ -82,9 +82,6 @@ under the License.
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.1.0</version>
           <configuration>
-            <pluginManagementExcludes>
-              <exclude>org.eclipse.m2e:lifecycle-mapping</exclude>
-            </pluginManagementExcludes>
           </configuration>
         </plugin>
       </plugins>
