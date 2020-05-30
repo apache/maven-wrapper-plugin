@@ -100,11 +100,11 @@ public class WrapperMojo extends AbstractMojo
 
     // CONSTANTS
 
-    private String groupId = "org.apache.maven";
+    private static final String WRAPPER_GROUP_ID = "org.apache.maven";
 
-    private String artifactId = "apache-maven-wrapper";
+    private static final String WRAPPER_ARTIFACT_ID = "apache-maven-wrapper";
 
-    private String extension = "zip";
+    private static final String WRAPPER_EXTENSION = "zip";
     
     // COMPONENTS 
     
@@ -156,11 +156,11 @@ public class WrapperMojo extends AbstractMojo
             new DefaultProjectBuildingRequest( session.getProjectBuildingRequest() );
 
         DefaultArtifactCoordinate coordinate = new DefaultArtifactCoordinate();
-        coordinate.setGroupId( groupId );
-        coordinate.setArtifactId( artifactId );
+        coordinate.setGroupId( WRAPPER_GROUP_ID );
+        coordinate.setArtifactId( WRAPPER_ARTIFACT_ID );
         coordinate.setVersion( getVersion( this.wrapperVersion ) ); 
         coordinate.setClassifier( distributionType );
-        coordinate.setExtension( extension );
+        coordinate.setExtension( WRAPPER_EXTENSION );
 
         return artifactResolver.resolveArtifact( buildingRequest, coordinate ).getArtifact();
     }
@@ -168,7 +168,7 @@ public class WrapperMojo extends AbstractMojo
     private void unpack( Artifact artifact, Path targetFolder ) throws IOException 
     {
         targetFolder = Files.createDirectories( targetFolder );
-        UnArchiver unarchiver = unarchivers.get( extension );
+        UnArchiver unarchiver = unarchivers.get( WRAPPER_EXTENSION );
         unarchiver.setDestDirectory( targetFolder.toFile() );
         unarchiver.setSourceFile( artifact.getFile() );
         if ( !includeDebugScript )
@@ -198,13 +198,16 @@ public class WrapperMojo extends AbstractMojo
             + "# regarding copyright ownership.  The ASF licenses this file\n"
             + "# to you under the Apache License, Version 2.0 (the\n"
             + "# \"License\"); you may not use this file except in compliance\n"
-            + "# with the License.  You may obtain a copy of the License at\n" + "# \n"
-            + "#   http://www.apache.org/licenses/LICENSE-2.0\n" + "# \n"
+            + "# with the License.  You may obtain a copy of the License at\n"
+            + "# \n"
+            + "#   http://www.apache.org/licenses/LICENSE-2.0\n"
+            + "# \n"
             + "# Unless required by applicable law or agreed to in writing,\n"
             + "# software distributed under the License is distributed on an\n"
             + "# \"AS IS\" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY\n"
             + "# KIND, either express or implied.  See the License for the\n"
-            + "# specific language governing permissions and limitations\n" + "# under the License.\n";
+            + "# specific language governing permissions and limitations\n"
+            + "# under the License.\n";
         
         try ( BufferedWriter out = Files.newBufferedWriter( wrapperPropertiesFile ) )
         {
