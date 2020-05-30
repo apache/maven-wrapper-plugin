@@ -30,7 +30,7 @@ under the License.
   </parent>
 
   <artifactId>maven-wrapper-plugin</artifactId>
-  <version>3.0.1-SNAPSHOT</version>
+  <version>3.0.1</version>
   <packaging>maven-plugin</packaging>
 
   <name>Apache Maven Wrapper Plugin</name>
@@ -47,7 +47,7 @@ under the License.
     <connection>scm:git:https://gitbox.apache.org/repos/asf/maven-wrapper-plugin.git</connection>
     <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/maven-wrapper-plugin.git</developerConnection>
     <url>https://github.com/apache/maven-wrapper-plugin/tree/${project.scm.tag}</url>
-    <tag>HEAD</tag>
+    <tag>maven-wrapper-plugin-3.0.1</tag>
   </scm>
   <issueManagement>
     <system>JIRA</system>
