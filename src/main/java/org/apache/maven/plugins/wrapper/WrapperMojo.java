@@ -130,6 +130,7 @@ public class WrapperMojo extends AbstractMojo
         try
         {
             unpack( artifact, basedir.toPath() );
+            getLog().info( "Unpacked " + artifact );
         }
         catch ( IOException e )
         {
