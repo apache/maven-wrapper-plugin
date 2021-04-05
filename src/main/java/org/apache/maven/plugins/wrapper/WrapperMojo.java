@@ -153,7 +153,7 @@ public class WrapperMojo extends AbstractMojo
             }
             catch ( IOException e )
             {
-                throw new MojoExecutionException( "can't create wrapper.proeprties", e );
+                throw new MojoExecutionException( "can't create wrapper.properties", e );
             }
         }
     }
