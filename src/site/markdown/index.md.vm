@@ -19,7 +19,7 @@ under the License.
 -->
 
 The Apache Maven Wrapper Plugin helps with downloading and unpacking the wrapper distribution 
- as introduced in Apache Maven 3.7.0
+ as introduced in Apache Maven 4
 
 Goals Overview
 --------------

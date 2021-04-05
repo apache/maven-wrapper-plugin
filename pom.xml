@@ -132,8 +132,9 @@ under the License.
                 <goal>wrapper</goal>
               </goals>
               <projectsDirectory>src/it/projects</projectsDirectory>
+              <debug>false</debug>
               <pomExcludes>
-                <!-- remove once Maven 3.7.0 is released -->
+                <!-- remove once Maven 4 is released -->
                 <pomExclude>wrapperversion/pom.xml</pomExclude>
               </pomExcludes>
             </configuration>
