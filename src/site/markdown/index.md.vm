@@ -18,8 +18,8 @@ specific language governing permissions and limitations
 under the License.
 -->
 
-The Apache Maven Wrapper Plugin helps with downloading and unpacking the wrapper distribution 
- as introduced in Apache Maven 4
+The Apache Maven Wrapper Plugin helps with downloading and unpacking the [wrapper distribution](/ref/4-LATEST/apache-maven-wrapper/) 
+as introduced in Apache Maven 4.
 
 Goals Overview
 --------------

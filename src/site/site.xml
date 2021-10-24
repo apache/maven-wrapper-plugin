@@ -31,5 +31,10 @@ under the License.
       <item name="License" href="http://www.apache.org/licenses/"/>
       <item name="Download" href="download.html"/>
     </menu>
+
+    <menu name="Reference">
+      <item name="Wrapper Distribution" href="/ref/4-LATEST/apache-maven-wrapper/"/>
+      <item name="Wrapper" href="/ref/4-LATEST/maven-wrapper/"/>
+    </menu>
   </body>
 </project>

@@ -20,27 +20,29 @@ under the License.
 
 Wrapper scripts are a set of files that can be added to your Maven project.
 If people want to build this project, they don't need to install Maven first.
-Instead they can call the maven wrapper script, which will download and unpack Maven into their `${user.home}/.m2/wrapper/dists` folder.
-It is also a way to let every build the project with the same Maven version.
+Instead they can call the Maven wrapper script (like `mvnw`/`mvnw.cmd`), which will download and unpack Maven into their `${user.home}/.m2/wrapper/dists` folder.
+It is also an easy way to let everyone build the project with the same Maven version.
 
 The Apache Maven Wrapper Plugin makes it easier to add these wrapper scripts to your project.
 
 The scripts work like this:
-- download the maven-wrapper jar, if it is not available yet.
+- download the maven-wrapper jar, if it is not available yet,
 - the wrapper-jar contains the code to download and run Apache Maven
 
-Types
+Apache Maven Wrapper Distribution Types
 -----
 
-There are 3 types available
+Wrapper scripts are provided by Maven 4 releases as ["Apache Maven Wrapper Distribution"](/ref/4-LATEST/apache-maven-wrapper/).
 
-- **Script** _(default)_: With this type the scripts will try to download the scripts via wget or curl in case of Unix based system, or use Powershell in case of Windows
+There are 3 types available:
+
+- **script** _(default)_: With this type the scripts will try to download the scripts via wget or curl in case of Unix based system, or use Powershell in case of Windows
 
 
-- **Bin**: With this type the maven-wrapper jar is already available in the `.mvn/wrapper` folder, so you don't have to rely on wget/curl or Powershell 
+- **bin**: With this type the maven-wrapper jar is already available in the `.mvn/wrapper` folder, so you don't have to rely on wget/curl or Powershell 
 The downside is that the project will contain a binary file in the source control management system.
 
-- **Source**: Since Maven already requires Java to run, why not compile and run a classfile to download the maven-wrapper jar? 
+- **source**: Since Maven already requires Java to run, why not compile and run a classfile to download the maven-wrapper jar? 
 This type comes with a `.mvn/wrapper/MavenWrapperDownloader.java` which will be compiled and executed on the fly.
 
 Maven Version
