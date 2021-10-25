@@ -1,8 +1,8 @@
-/target/
-/.classpath
-/.project
-/.settings
+target/
+.classpath
+.project
+.settings/
 *.iml
 .idea
-/.factorypath
+.factorypath
 .DS_Store
