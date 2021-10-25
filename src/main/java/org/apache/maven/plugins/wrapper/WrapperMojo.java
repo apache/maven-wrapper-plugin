@@ -48,7 +48,7 @@ import org.codehaus.plexus.archiver.UnArchiver;
 import org.codehaus.plexus.components.io.fileselectors.FileSelector;
 
 /**
- * Adds the maven-wrapper files to this project 
+ * Unpacks the maven-wrapper distribution files to the current project source tree. 
  * 
  * @author Robert Scholte
  * @since 3.0.0
@@ -66,7 +66,7 @@ public class WrapperMojo extends AbstractMojo
     private String mavenVersion;
 
     /**
-     * The version of the wrapper, default value is the Runtime version of Maven, should be at least 4
+     * The version of the wrapper distribution, default value is the Runtime version of Maven, should be at least 4
      */
     @Parameter( property = "wrapperVersion" )
     private String wrapperVersion;
@@ -101,11 +101,11 @@ public class WrapperMojo extends AbstractMojo
 
     // CONSTANTS
 
-    private static final String WRAPPER_GROUP_ID = "org.apache.maven";
+    private static final String WRAPPER_DISTRIBUTION_GROUP_ID = "org.apache.maven";
 
-    private static final String WRAPPER_ARTIFACT_ID = "apache-maven-wrapper";
+    private static final String WRAPPER_DISTRIBUTION_ARTIFACT_ID = "apache-maven-wrapper";
 
-    private static final String WRAPPER_EXTENSION = "zip";
+    private static final String WRAPPER_DISTRIBUTION_EXTENSION = "zip";
     
     // COMPONENTS 
     
@@ -128,7 +128,7 @@ public class WrapperMojo extends AbstractMojo
         Artifact artifact;
         try
         {
-            artifact = downloadWrapper( wrapperVersion );
+            artifact = downloadWrapperDistribution( wrapperVersion );
         }
         catch ( ArtifactResolverException e )
         {
@@ -158,18 +158,18 @@ public class WrapperMojo extends AbstractMojo
         }
     }
     
-    private Artifact downloadWrapper( String wrapperVersion )
+    private Artifact downloadWrapperDistribution( String wrapperVersion )
         throws ArtifactResolverException
     {
         ProjectBuildingRequest buildingRequest =
             new DefaultProjectBuildingRequest( session.getProjectBuildingRequest() );
 
         DefaultArtifactCoordinate coordinate = new DefaultArtifactCoordinate();
-        coordinate.setGroupId( WRAPPER_GROUP_ID );
-        coordinate.setArtifactId( WRAPPER_ARTIFACT_ID );
+        coordinate.setGroupId( WRAPPER_DISTRIBUTION_GROUP_ID );
+        coordinate.setArtifactId( WRAPPER_DISTRIBUTION_ARTIFACT_ID );
         coordinate.setVersion( wrapperVersion ); 
         coordinate.setClassifier( distributionType );
-        coordinate.setExtension( WRAPPER_EXTENSION );
+        coordinate.setExtension( WRAPPER_DISTRIBUTION_EXTENSION );
 
         return artifactResolver.resolveArtifact( buildingRequest, coordinate ).getArtifact();
     }
@@ -177,7 +177,7 @@ public class WrapperMojo extends AbstractMojo
     private void unpack( Artifact artifact, Path targetFolder ) throws IOException 
     {
         targetFolder = Files.createDirectories( targetFolder );
-        UnArchiver unarchiver = unarchivers.get( WRAPPER_EXTENSION );
+        UnArchiver unarchiver = unarchivers.get( WRAPPER_DISTRIBUTION_EXTENSION );
         unarchiver.setDestDirectory( targetFolder.toFile() );
         unarchiver.setSourceFile( artifact.getFile() );
         if ( !includeDebugScript )
