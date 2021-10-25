@@ -6,10 +6,10 @@ if "%MVNW_VERBOSE%" == "true" ECHO Found %LAUNCHER_JAR%
 goto endWrapper
 
 :downloadWrapper
-set DOWNLOAD_URL="https://repo.maven.apache.org/maven2/org/apache/maven/maven-wrapper/${project.version}/maven-wrapper-${project.version}.jar"
+set DOWNLOAD_URL="https://repo.maven.apache.org/maven2/org/apache/maven/wrapper/maven-wrapper/${project.version}/maven-wrapper-${project.version}.jar"
 
 if not "%MVNW_REPOURL%" == "" (
-    SET DOWNLOAD_URL="%MVNW_REPOURL%/org/apache/maven/maven-wrapper/${project.version}/maven-wrapper-${project.version}.jar"
+    SET DOWNLOAD_URL="%MVNW_REPOURL%/org/apache/maven/wrapper/maven-wrapper/${project.version}/maven-wrapper-${project.version}.jar"
 )
 if "%MVNW_VERBOSE%" == "true" (
     echo Couldn't find %LAUNCHER_JAR%, downloading it ...

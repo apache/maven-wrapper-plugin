@@ -31,7 +31,7 @@ under the License.
     <dependencySet>
       <useProjectArtifact>false</useProjectArtifact>
       <includes>
-        <include>org.apache.maven:maven-wrapper:jar:*</include>
+        <include>org.apache.maven.wrapper:maven-wrapper:jar:*</include>
       </includes>
       <outputDirectory>.mvn/wrapper</outputDirectory>
       <outputFileNameMapping>maven-wrapper.jar</outputFileNameMapping>

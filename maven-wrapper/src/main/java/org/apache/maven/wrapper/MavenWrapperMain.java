@@ -34,7 +34,8 @@ import java.util.Properties;
  */
 public class MavenWrapperMain
 {
-    private static final String POM_PROPERTIES = "/META-INF/maven/org.apache.maven/maven-wrapper/pom.properties";
+    private static final String POM_PROPERTIES =
+        "/META-INF/maven/org.apache.maven.wrapper/maven-wrapper/pom.properties";
 
     public static final String DEFAULT_MAVEN_USER_HOME = System.getProperty( "user.home" ) + "/.m2";
 

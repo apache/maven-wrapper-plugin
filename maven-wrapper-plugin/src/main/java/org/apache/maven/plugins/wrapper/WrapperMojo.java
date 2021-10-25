@@ -66,12 +66,6 @@ public class WrapperMojo extends AbstractMojo
     private String mavenVersion;
 
     /**
-     * The version of the wrapper distribution, default value is the Runtime version of Maven, should be at least 4
-     */
-    @Parameter( property = "wrapperVersion" )
-    private String wrapperVersion;
-
-    /**
      * Options are:
      * <dl>
      *   <dt>script (default)</dt>
@@ -101,9 +95,9 @@ public class WrapperMojo extends AbstractMojo
 
     // CONSTANTS
 
-    private static final String WRAPPER_DISTRIBUTION_GROUP_ID = "org.apache.maven";
+    private static final String WRAPPER_DISTRIBUTION_GROUP_ID = "org.apache.maven.wrapper";
 
-    private static final String WRAPPER_DISTRIBUTION_ARTIFACT_ID = "apache-maven-wrapper";
+    private static final String WRAPPER_DISTRIBUTION_ARTIFACT_ID = "maven-wrapper-distribution";
 
     private static final String WRAPPER_DISTRIBUTION_EXTENSION = "zip";
     
@@ -118,13 +112,8 @@ public class WrapperMojo extends AbstractMojo
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException
     {
-        String wrapperVersion = getVersion( this.wrapperVersion );
-        if ( wrapperVersion.startsWith( "3." ) )
-        {
-            throw new MojoFailureException( "wrapperVersion not supported for Maven " + wrapperVersion + ","
-                + " it must be at least 4." );
-        }
-        
+        String wrapperVersion = getVersion( null, this.getClass(), "org.apache.maven.plugins/maven-wrapper-plugin" );
+
         Artifact artifact;
         try
         {
@@ -134,7 +123,7 @@ public class WrapperMojo extends AbstractMojo
         {
             throw new MojoExecutionException( e.getMessage(), e );
         }
-        
+
         try
         {
             unpack( artifact, basedir.toPath() );
@@ -144,17 +133,15 @@ public class WrapperMojo extends AbstractMojo
         {
             throw new MojoExecutionException( e.getMessage(), e );
         }
-        
-        if ( mavenVersion != null )
+
+        mavenVersion = getVersion( mavenVersion, Maven.class, "org.apache.maven/maven-core" );
+        try
         {
-            try
-            {
-                replaceProperties( Files.createDirectories( basedir.toPath().resolve( ".mvn/wrapper" ) ) );
-            }
-            catch ( IOException e )
-            {
-                throw new MojoExecutionException( "can't create maven-wrapper.properties", e );
-            }
+            replaceProperties( Files.createDirectories( basedir.toPath().resolve( ".mvn/wrapper" ) ) );
+        }
+        catch ( IOException e )
+        {
+            throw new MojoExecutionException( "can't create maven-wrapper.properties", e );
         }
     }
     
@@ -222,21 +209,18 @@ public class WrapperMojo extends AbstractMojo
         {
             out.append( license );
             out.append( "distributionUrl=https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/"
-                + mavenVersion
-                + "/apache-maven-"
-                + mavenVersion
-                + "-bin.zip" );
+                + mavenVersion + "/apache-maven-" + mavenVersion + "-bin.zip" );
         }
     }
     
-    private String getVersion( String defaultVersion )
+    private String getVersion( String defaultVersion, Class<?> clazz, String path )
     {
         String version = defaultVersion;
         if ( version == null )
         {
             Properties props = new Properties();
             try ( InputStream is =
-                Maven.class.getResourceAsStream( "/META-INF/maven/org.apache.maven/maven-core/pom.properties" ) )
+                clazz.getResourceAsStream( "/META-INF/maven/" + path + "/pom.properties" ) )
             {
                 props.load( is );
                 version = props.getProperty( "version" );

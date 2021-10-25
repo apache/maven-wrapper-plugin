@@ -11,10 +11,10 @@ else
       echo "Couldn't find .mvn/wrapper/maven-wrapper.jar, downloading it ..."
     fi
 
-    jarUrl="https://repo.maven.apache.org/maven2/org/apache/maven/maven-wrapper/${project.version}/maven-wrapper-${project.version}.jar"
+    jarUrl="https://repo.maven.apache.org/maven2/org/apache/maven/wrapper/maven-wrapper/${project.version}/maven-wrapper-${project.version}.jar"
 
     if [ -n "$MVNW_REPOURL" ]; then
-      jarUrl="$MVNW_REPOURL/org/apache/maven/maven-wrapper/${project.version}/maven-wrapper-${project.version}.jar"
+      jarUrl="$MVNW_REPOURL/org/apache/maven/wrapper/maven-wrapper/${project.version}/maven-wrapper-${project.version}.jar"
     fi
 
     if [ "$MVNW_VERBOSE" = true ]; then

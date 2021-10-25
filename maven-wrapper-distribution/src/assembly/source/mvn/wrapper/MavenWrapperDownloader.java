@@ -33,7 +33,7 @@ public class MavenWrapperDownloader {
     /**
      * Default URL to download the maven-wrapper.jar from, if no 'downloadUrl' is provided.
      */
-    private static final String DEFAULT_DOWNLOAD_PATH = "/org/apache/maven/maven-wrapper/"
+    private static final String DEFAULT_DOWNLOAD_PATH = "/org/apache/maven/wrapper/maven-wrapper/"
         + WRAPPER_VERSION + "/maven-wrapper-" + WRAPPER_VERSION + ".jar";
 
     /**

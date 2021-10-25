@@ -29,6 +29,7 @@ under the License.
     <relativePath />
   </parent>
 
+  <groupId>org.apache.maven.wrapper</groupId>
   <artifactId>maven-wrapper-parent</artifactId>
   <version>3.0.3-SNAPSHOT</version>
   <packaging>pom</packaging>
