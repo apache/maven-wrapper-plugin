@@ -3,4 +3,6 @@
 /.project
 /.settings
 *.iml
+.idea
 /.factorypath
+.DS_Store
