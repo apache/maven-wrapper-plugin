@@ -40,10 +40,6 @@ under the License.
   </description>
   <inceptionYear>2020</inceptionYear>
 
-  <prerequisites>
-    <maven>${mavenVersion}</maven>
-  </prerequisites>
-
   <scm>
     <connection>scm:git:https://gitbox.apache.org/repos/asf/maven-wrapper-plugin.git</connection>
     <developerConnection>scm:git:https://gitbox.apache.org/repos/asf/maven-wrapper-plugin.git</developerConnection>
@@ -66,6 +62,7 @@ under the License.
   </distributionManagement>
 
   <properties>
+    <maven.site.path>wrapper-archives/wrapper-LATEST</maven.site.path>
     <mavenVersion>3.1.0</mavenVersion>
     <javaVersion>8</javaVersion>
     <project.build.outputTimestamp>2021-04-05T14:15:37Z</project.build.outputTimestamp>
@@ -76,21 +73,4 @@ under the License.
     <module>maven-wrapper-distribution</module>
     <module>maven-wrapper-plugin</module>
   </modules>
-
-  <build>
-    <pluginManagement>
-      <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-jxr-plugin</artifactId>
-          <version>3.0.0</version>
-        </plugin>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-project-info-reports-plugin</artifactId>
-          <version>3.1.0</version>
-        </plugin>
-      </plugins>
-    </pluginManagement>
-  </build>
 </project>

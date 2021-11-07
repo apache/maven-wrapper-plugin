@@ -55,4 +55,4 @@ mvnwDebug.cmd
 
  []
 
- Distribution can be installed in a project either by unpacking zip archive by hand, or by using {{{/plugins/maven-wrapper-plugin/}<<<wrapper:wrapper>>>}}.
+ Distribution can be installed in a project either by unpacking zip archive by hand, or by using {{{../maven-wrapper-plugin/}<<<wrapper:wrapper>>>}}.

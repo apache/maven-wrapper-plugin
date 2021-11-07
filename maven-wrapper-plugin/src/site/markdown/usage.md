@@ -48,7 +48,7 @@ This type comes with a `.mvn/wrapper/MavenWrapperDownloader.java` which will be 
 Maven Version
 -------------
 By default the plugin will assume the same version as the Maven runtime (calling `mvn -v`). But you can pick a different version.
-Either call `mvn wrapper -DmavenVersion=x`, where x is any valid Apache Maven Release, see https://search.maven.org/artifact/org.apache.maven/apache-maven
+Either call `mvn wrapper:wrapper -DmavenVersion=x`, where x is any valid Apache Maven Release, see https://search.maven.org/artifact/org.apache.maven/apache-maven
 Another option is adjust the `distributionUrl` in `.mvn/wrapper/maven-wrapper.properties`
 
 Debugging
@@ -56,4 +56,4 @@ Debugging
 
 The apache-maven-wrapper distributions all contains the `mvnwDebug`-script for both Windows and Unix based operating systems. 
 This makes it possible to debug through Apache Maven, Maven Plugin or Maven Extension. 
-You can exclude these scripts by calling `mvn wrapper -DincludeDebug=false`
+You can exclude these scripts by calling `mvn wrapper:wrapper -DincludeDebug=false`
