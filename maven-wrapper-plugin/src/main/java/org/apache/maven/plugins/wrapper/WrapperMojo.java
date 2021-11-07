@@ -47,6 +47,8 @@ import org.apache.maven.shared.transfer.artifact.resolve.ArtifactResolverExcepti
 import org.codehaus.plexus.archiver.UnArchiver;
 import org.codehaus.plexus.components.io.fileselectors.FileSelector;
 
+import static org.apache.maven.shared.utils.logging.MessageUtils.buffer;
+
 /**
  * Unpacks the maven-wrapper distribution files to the current project source tree. 
  * 
@@ -127,7 +129,8 @@ public class WrapperMojo extends AbstractMojo
         try
         {
             unpack( artifact, basedir.toPath() );
-            getLog().info( "Unpacked " + artifact );
+            getLog().info( "Unpacked " + buffer().strong( distributionType ) + " type wrapper distribution "
+                + artifact );
         }
         catch ( IOException e )
         {
@@ -186,8 +189,15 @@ public class WrapperMojo extends AbstractMojo
      */
     private void replaceProperties( Path targetFolder ) throws IOException
     {
+        String repoUrl = "https://repo.maven.apache.org/maven2";
+        String distributionUrl =
+            repoUrl + "/org/apache/maven/apache-maven/" + mavenVersion + "/apache-maven-" + mavenVersion + "-bin.zip";
+
         Path wrapperPropertiesFile = targetFolder.resolve( "maven-wrapper.properties" );
-        
+
+        getLog().info( "Configuring .mvn/wrapper/maven-wrapper.properties to use "
+            + buffer().strong( "Maven " + mavenVersion ) + " and download from " + repoUrl );
+
         final String license = "# Licensed to the Apache Software Foundation (ASF) under one\n"
             + "# or more contributor license agreements.  See the NOTICE file\n"
             + "# distributed with this work for additional information\n"
@@ -208,8 +218,7 @@ public class WrapperMojo extends AbstractMojo
         try ( BufferedWriter out = Files.newBufferedWriter( wrapperPropertiesFile ) )
         {
             out.append( license );
-            out.append( "distributionUrl=https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/"
-                + mavenVersion + "/apache-maven-" + mavenVersion + "-bin.zip" );
+            out.append( "distributionUrl=" + distributionUrl );
         }
     }
     
