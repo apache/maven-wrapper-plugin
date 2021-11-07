@@ -72,11 +72,13 @@ public class Installer
         {
             distributionUrl = configuration.getDistribution();
         }
-        Logger.info( "Downloading Maven binary from " + distributionUrl );
+
         boolean alwaysDownload = configuration.isAlwaysDownload();
         boolean alwaysUnpack = configuration.isAlwaysUnpack();
 
         PathAssembler.LocalDistribution localDistribution = pathAssembler.getDistribution( configuration );
+
+        Logger.info( "Installing Maven distribution " + localDistribution.getDistributionDir().getFileName() );
 
         Path localZipFile = localDistribution.getZipFile();
         boolean downloaded = false;
@@ -95,30 +97,27 @@ public class Installer
 
         if ( downloaded || alwaysUnpack || dirs.isEmpty() )
         {
-            Files.walkFileTree( distDir.toAbsolutePath(), new SimpleFileVisitor<Path>()
+            for ( Path distSubDir : dirs )
             {
-                @Override
-                public FileVisitResult postVisitDirectory( Path dir, IOException exc )
-                    throws IOException
+                Logger.info( "Deleting directory " + distSubDir.toAbsolutePath() );
+                Files.walkFileTree( distSubDir.toAbsolutePath(), new SimpleFileVisitor<Path>()
                 {
-                    if ( dir.getParent().equals( distDir ) )
+                    @Override
+                    public FileVisitResult postVisitDirectory( Path dir, IOException exc )
+                        throws IOException
                     {
-                        Logger.info( "Deleting directory " + distDir.toAbsolutePath() );
                         Files.delete( dir );
+                        return FileVisitResult.CONTINUE;
                     }
-                    return FileVisitResult.CONTINUE;
-                }
-
-                public FileVisitResult visitFile( Path file, BasicFileAttributes attrs )
-                    throws IOException
-                {
-                    if ( !file.getParent().equals( distDir ) )
+    
+                    public FileVisitResult visitFile( Path file, BasicFileAttributes attrs )
+                        throws IOException
                     {
                         Files.delete( file );
-                    }
-                    return FileVisitResult.CONTINUE;
-                };
-            } );
+                        return FileVisitResult.CONTINUE;
+                    };
+                } );
+            }
 
             Logger.info( "Unzipping " + localZipFile.toAbsolutePath() + " to " + distDir.toAbsolutePath() );
             unzip( localZipFile, distDir );
@@ -128,7 +127,7 @@ public class Installer
             {
                 throw new RuntimeException( String.format(
                    "Maven distribution '%s' does not contain any directories. Expected to find exactly 1 directory.",
-                   distributionUrl ) );
+                   distDir ) );
             }
             setExecutablePermissions( dirs.get( 0 ) );
         }
@@ -136,7 +135,7 @@ public class Installer
         {
             throw new IllegalStateException( String.format(
                    "Maven distribution '%s' contains too many directories. Expected to find exactly 1 directory.",
-                   distributionUrl ) );
+                   distDir ) );
         }
         return dirs.get( 0 );
     }
@@ -157,15 +156,15 @@ public class Installer
         {
             return;
         }
-        Path mavenCommand = mavenHome.resolve( "bin/mvn" );
+        Path binMvnScript = mavenHome.resolve( "bin/mvn" );
         String errorMessage = null;
         try
         {
-            ProcessBuilder pb = new ProcessBuilder( "chmod", "755", mavenCommand.toString() );
+            ProcessBuilder pb = new ProcessBuilder( "chmod", "755", binMvnScript.toString() );
             Process p = pb.start();
             if ( p.waitFor() == 0 )
             {
-                Logger.info( "Set executable permissions for: " + mavenCommand.toString() );
+                Logger.info( "Set executable permissions for " + binMvnScript.toString() );
             }
             else
             {
@@ -188,8 +187,8 @@ public class Installer
         }
         if ( errorMessage != null )
         {
-            Logger.warn( "Could not set executable permissions for: " + mavenCommand );
-            Logger.warn( "Please do this manually if you want to use maven." );
+            Logger.warn( "Could not set executable permissions for " + binMvnScript );
+            Logger.warn( "Please do this manually if you want to use Maven." );
         }
     }
 
