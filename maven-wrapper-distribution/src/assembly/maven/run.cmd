@@ -9,6 +9,18 @@
   "-Dmaven.multiModuleProjectDirectory=%MAVEN_PROJECTBASEDIR%" ^
   %LAUNCHER_CLASS% %*
 if ERRORLEVEL 1 goto error
+
+@REM read distributionUrl from $MAVEN_PROJECTBASEDIR/.mvn/wrapper/maven-wrapper.properties
+FOR /F "tokens=1,2 delims==" %%A IN ("%MAVEN_PROJECTBASEDIR%\.mvn\wrapper\maven-wrapper.properties") DO (
+    IF "%%A"=="distributionUrl" SET DISTRIBUTION_URL=%%B
+)
+
+for /F %i in (%DISTRIBUTION_URL%) do SET DISTRIBUTION=%~ni
+
+SET MVN=%USERPROFILE%\.m2\wrapper\dists\%DISTRIBUTION%/*/bin/mvn.cmd
+
+%MVN% %*
+
 goto end
 
 :error

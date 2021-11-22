@@ -218,7 +218,7 @@ public class WrapperMojo extends AbstractMojo
         try ( BufferedWriter out = Files.newBufferedWriter( wrapperPropertiesFile ) )
         {
             out.append( license );
-            out.append( "distributionUrl=" + distributionUrl );
+            out.append( "distributionUrl=" + distributionUrl + "\n" );
         }
     }
     

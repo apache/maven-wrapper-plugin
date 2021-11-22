@@ -31,6 +31,7 @@ import java.util.stream.Stream;
  * Maven starter, from a provided Maven home directory.
  *
  * @author Hans Dockter
+ * @deprecated will be removed once launching Maven is not done here but in mvnw script by calling mvn
  */
 public class BootstrapMainStarter
 {
@@ -47,7 +48,8 @@ public class BootstrapMainStarter
         System.setProperty( "classworlds.conf", mavenHome.resolve( "bin/m2.conf" ).toAbsolutePath().toString() );
 
         Method mainMethod = mainClass.getMethod( "main", String[].class );
-        mainMethod.invoke( null, new Object[] { args } );
+        //mainMethod.invoke( null, new Object[] { args } );
+        System.out.println( "Now, mvnw script should call " + mavenHome.toAbsolutePath().toString() + "/bin/mvn" );
     }
 
     private Path findLauncherJar( Path mavenHome ) throws RuntimeException, IOException

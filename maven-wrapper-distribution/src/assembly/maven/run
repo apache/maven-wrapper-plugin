@@ -8,7 +8,7 @@ if $cygwin || $mingw ; then
   MAVEN_PROJECTBASEDIR=`cygpath --windows "$MAVEN_PROJECTBASEDIR"`
 fi
 
-exec "$JAVACMD" \
+"$JAVACMD" \
   $MAVEN_OPTS \
   $MAVEN_DEBUG_OPTS \
   -classpath "$LAUNCHER_JAR" \
@@ -17,3 +17,17 @@ exec "$JAVACMD" \
   "-Dlibrary.jansi.path=${MAVEN_HOME}/lib/jansi-native" \
   "-Dmaven.multiModuleProjectDirectory=$MAVEN_PROJECTBASEDIR" \
   $LAUNCHER_CLASS "$@"
+
+# read distributionUrl from $MAVEN_PROJECTBASEDIR/.mvn/wrapper/maven-wrapper.properties
+while IFS="=" read key value; do
+  case "$key" in (distributionUrl) distributionUrl="$value"; break ;;
+  esac
+done < "$MAVEN_PROJECTBASEDIR/.mvn/wrapper/maven-wrapper.properties"
+
+# local distribution dir is distributionUrl basename without extension
+distribution=`basename $distributionUrl .zip`
+
+mvn=~/.m2/wrapper/dists/$distribution/*/bin/mvn
+echo "mvnw will call $mvn"
+
+exec $mvn "$@"
