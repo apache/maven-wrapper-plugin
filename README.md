@@ -14,7 +14,7 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 -->
-Contributing to [Apache Maven Wrapper Plugin](https://maven.apache.org/plugins/maven-wrapper-plugin/)
+Contributing to [Apache Maven Wrapper](https://maven.apache.org/wrapper/)
 ======================
 
 [![ASF Jira](https://img.shields.io/endpoint?url=https%3A%2F%2Fmaven.apache.org%2Fbadges%2Fasf_jira-MWRAPPER.json)][jira]
@@ -82,7 +82,7 @@ Additional Resources
 --------------------
 
 + [Contributing patches](https://maven.apache.org/guides/development/guide-maven-development.html#Creating_and_submitting_a_patch)
-+ [Apache Maven Artifact Resolver project page][jira]
++ [Apache Maven Wrapper project page][jira]
 + [Contributor License Agreement][cla]
 + [General GitHub documentation](https://help.github.com/)
 + [GitHub pull request documentation](https://help.github.com/send-pull-requests/)
